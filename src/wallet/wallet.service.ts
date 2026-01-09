@@ -21,7 +21,8 @@ export class WalletService {
     return wallet.balance;
   }
 
-  async debit(userId: string, amount: number) {
+  // Async removed for non-requirement
+  debit(userId: string, amount: number) {
     const wallet = wallets[userId];
 
     if (!wallet) {
@@ -29,7 +30,6 @@ export class WalletService {
     }
 
     if (wallet.balance >= amount) {
-      
       wallet.balance -= amount;
 
       return wallet;

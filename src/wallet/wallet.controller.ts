@@ -20,6 +20,7 @@ export class WalletController {
     };
   }
 
+  // Await added for getting data asynchronously
   @Post('debit')
   async debit(@Body() body: AmountDto) {
     const wallet = await this.walletService.debit(body.userId, body.amount);

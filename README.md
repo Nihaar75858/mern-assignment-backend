@@ -98,6 +98,10 @@ You may refactor the service if needed, but minimal changes are preferred.
 - There is no single "correct" solution.
 - You may update this README if required to document your changes.
 
+## Changes added
+
+- Added "endOfLine" in .prettierc to avoid line ending errors. 
+
 ---
 
 ## Submission
