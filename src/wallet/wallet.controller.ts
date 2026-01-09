@@ -6,21 +6,28 @@ import { AmountDto } from './dto/amount.dto';
 export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
+  // Async, Await added for getting data asynchronously
+  // Reason: Data is brought by the calling other functions. Will be required in the future as more users come.
   @Get('balance')
-  getBalance(@Query('userId') userId: string) {
+  async getBalance(@Query('userId') userId: string) {
+    const balance = await this.walletService.getBalance(userId);
     return {
-      balance: this.walletService.getBalance(userId),
+      balance,
     };
   }
 
+  // Async, Await added for crediting amount asynchronously
+  // Reason: Data is brought by the calling other functions. Will be required in the future as more users come.
   @Post('credit')
-  credit(@Body() body: AmountDto) {
+  async credit(@Body() body: AmountDto) {
+    const balance = await this.walletService.credit(body.userId, body.amount);
     return {
-      balance: this.walletService.credit(body.userId, body.amount),
+      balance,
     };
   }
 
-  // Await added for getting data asynchronously
+  // Await added for debiting data asynchronously
+  // Reason: Data is brought by the calling other functions. Will be required in the future as more users come.
   @Post('debit')
   async debit(@Body() body: AmountDto) {
     const wallet = await this.walletService.debit(body.userId, body.amount);
